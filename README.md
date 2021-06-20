@@ -2,7 +2,7 @@
 ---
 ### Đề tài
 Xây dựng website bán thiết bị chơi game TNC Store
-### Thành viên
+### Thành viên nhóm 2
 
 - Trần Đăng Quang (Nhóm trưởng)
 - Phạm Lê Khánh Huyền
@@ -10,8 +10,8 @@ Xây dựng website bán thiết bị chơi game TNC Store
 
 ### Cấu trúc thư mục
 
-- /BaoCao chứa báo cáo môn học
-- /CSDL chứa file script database
+- [/BaoCao](./BaoCao) chứa báo cáo môn học
+- [/CSDL](./CSDL) chứa file script database
 
 ### Requirements
 
