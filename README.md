@@ -1,7 +1,7 @@
 ## Đồ án lập trình web nâng cao D13QTANM EPU
 ---
 ### Đề tài
-Xây dựng website bán thiết bị điện tử TNC Store
+Xây dựng website bán thiết bị chơi game TNC Store
 ### Thành viên
 
 - Trần Đăng Quang (Nhóm trưởng)
