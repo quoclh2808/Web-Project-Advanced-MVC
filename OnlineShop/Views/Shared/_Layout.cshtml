@@ -98,7 +98,35 @@
                 .options li:hover {
                     cursor: pointer
                 }
+        #back-to-top-btn {
+            display: inline-block;
+            background-color: #29324E;
+            width: 60px;
+            height: 60px;
+            text-align: center;
+            border-radius: 50%;
+            position: fixed;
+            bottom: 100px;
+            right: 20px;
+            transition: background-color .3s, opacity .5s, visibility .5s;
+            opacity: 0;
+            visibility: hidden;
+            z-index: 1000;
+        }
 
+            #back-to-top-btn::after {
+                content: "\f077";
+                font-family: Font Awesome\ 5 Pro;
+                font-weight: normal;
+                font-style: normal;
+                font-size: 2em;
+                line-height: 60px;
+                color: #fff;
+            }
+            #back-to-top-btn.show {
+                opacity: 1;
+                visibility: visible;
+            }
     </style>
 </head>
 
@@ -225,6 +253,8 @@
     </div>
     <div id="success-alert" style="display: none"><i class="fas fa-check-circle"></i>Sản phẩm đã được thêm vào giỏ hàng.</div>
     <div id="empty-alert" style="display: none"><i class="fas fa-check-circle"></i>Giỏ hàng của bạn đang trống!</div>
+    <!-- Back to top button -->
+    <a id="back-to-top-btn"></a>
     <script src="/Assets/Client/js/jquery-3.3.1.min.js"></script>
     <script src="/Assets/Client/js/jquery-ui.js"></script>
     <script src="/Assets/Admin/js/jquery.validate.min.js"></script>
@@ -232,16 +262,33 @@
     <script src="/Assets/Client/js/CartController.js"></script>
     <script src="/Assets/Client/js/swiper/swiper-bundle.min.js"></script>
     @RenderSection("js", required: false)
+    <!--back to top button-->
+    <script>
+        var btn = $('#back-to-top-btn');
+
+        $(window).scroll(function () {
+            if ($(window).scrollTop() > 300) {
+                btn.addClass('show');
+            } else {
+                btn.removeClass('show');
+            }
+        });
+
+        btn.on('click', function (e) {
+            e.preventDefault();
+            $('html, body').animate({ scrollTop: 0 }, '300');
+        });
+    </script>
     <!--Start of Tawk.to Script-->
     <script type="text/javascript">
-        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-        (function(){
-            var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-            s1.async=true;
-            s1.src='https://embed.tawk.to/60cda31d7f4b000ac0386b3c/1f8hkab4d';
-            s1.charset='UTF-8';
-            s1.setAttribute('crossorigin','*');
-            s0.parentNode.insertBefore(s1,s0);
+        var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
+        (function () {
+            var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
+            s1.async = true;
+            s1.src = 'https://embed.tawk.to/60cda31d7f4b000ac0386b3c/1f8hkab4d';
+            s1.charset = 'UTF-8';
+            s1.setAttribute('crossorigin', '*');
+            s0.parentNode.insertBefore(s1, s0);
         })();
     </script>
     <!--End of Tawk.to Script-->

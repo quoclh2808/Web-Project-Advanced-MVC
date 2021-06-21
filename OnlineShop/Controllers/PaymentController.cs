@@ -96,22 +96,34 @@ namespace OnlineShop.Controllers
                     //If executed payment failed then we will show payment failure message to user
                     if (executedPayment.state.ToLower() != "approved")
                     {
-                        return View("FailureView");
+                        //return View("FailureView");
+                        return Redirect("/chua-hoan-thanh");
                     }
                 }
             }
             catch (Exception ex)
             {
-                return View("FailureView");
+                //return View("FailureView");
+                return Redirect("/chua-hoan-thanh");
             }
 
             //on successful payment, show success page to user.
             Model.EF.Order order = db.Orders.Find(Session["OrderID"]);
             order.Status = "yes paypal";
             db.SaveChanges();
+            string content = System.IO.File.ReadAllText(Server.MapPath("~/Assets/Client/template/1.cshtml"));
+            content = content.Replace("{{CustomerName}}", order.ShipName);
+            content = content.Replace("{{Phone}}", order.ShipMobile);
+            content = content.Replace("{{Email}}", order.ShipEmail);
+            content = content.Replace("{{Address}}", order.ShipAddress);
+            content = content.Replace("{{Total}}", order.TotalPrice.Value.ToString("N0"));
+            var toEmail = ConfigurationManager.AppSettings["ToEmailAddress"].ToString();
+            new MailHelper().SendEmail(order.ShipEmail, "Xác nhận đơn hàng mới từ TNC Store", content);
+            new MailHelper().SendEmail(toEmail, "TNC Store", content);
             Session.Remove("OrderID");
             Session.Remove(SessionMember.CartSession);
-            return View("SuccessView");
+            //return View("SuccessView");
+            return Redirect("/hoan-thanh");
         }
 
         private PayPal.Api.Payment payment;
